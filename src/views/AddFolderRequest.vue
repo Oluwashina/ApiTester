@@ -205,8 +205,8 @@ export default {
               status: '',
               responseCode: '',
               responseColor: '',
-              responseBody: '',
-              requestBody:  '', 
+              responseBody: {},
+              requestBody:  {}, 
               folder_id: '',
               project_id:  '',
               requestName: '',
@@ -315,7 +315,7 @@ export default {
            this.$store.dispatch("SaveExample",{
              "method": this.method,
              "url": this.url,
-             "request": this.requestBody == '' ? {} : this.requestBody,
+             "request": this.requestBody,
              "response": this.responseBody,
              "folder_id": folderId,
              "project_id": this.project_id,
@@ -356,12 +356,6 @@ export default {
       }
     },
     computed:{
-        projects(){
-            return this.$store.state.project.projects
-        },
-        response(){
-          return this.$store.state.calls.response
-        },
         Calls(){
           return this.$store.state.project.callsbyid
         }
