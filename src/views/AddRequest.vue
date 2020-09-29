@@ -366,7 +366,7 @@ export default {
         Calls(){
           return this.$store.state.project.callsbyid
         }
-    },
+    },  
 }
 </script>
 
