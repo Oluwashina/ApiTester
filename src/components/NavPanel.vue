@@ -1006,7 +1006,6 @@ toggleModal() {
       this.$router.push('/addrequest/'+id)
     },
     addFolderRequest(id){
-      alert(id)
        this.$router.push('/addfolderrequest/'+id)
     }
  },
