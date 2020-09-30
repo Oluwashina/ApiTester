@@ -417,32 +417,38 @@
 
        <!-- end of modal for deleting a folder -->
 
+<v-app-bar app height='60px' flat color="white">
+  <v-app-bar-nav-icon class="grey--text hidden-md-and-up" @click="drawer = !drawer"></v-app-bar-nav-icon>
+  <h3 class="ma-3">Api Tester</h3>
+  <v-spacer></v-spacer>
+   
+    <router-link to="/" style="cursor: pointer; color: #0069d9; font-size: 17px;" class=" no-line">Test Request</router-link>
+  <v-btn icon class="ma-3">
+      <v-icon color="#033953">
+        mdi-power
+      </v-icon>
+  </v-btn>
+</v-app-bar>
 
  <!-- navigation drawer -->
  <v-navigation-drawer app clipped-left v-model="drawer" class="nav" floating color="#1e2229" width="300"> 
- <v-layout column align-center>
- <v-flex class="mt-3">
- <div class="mr-2">
-     <p class="col title">Api Tester</p>
-  </div>
- </v-flex>
- </v-layout> 
  
         <v-layout column align-center>
-          <v-flex class="mt-n4">
+          <v-flex class="mt-5">
               <div class="">
-                <v-list-item-avatar  size="50">
+                <v-list-item-avatar  size="80">
                     <v-img src="/logo.svg" ></v-img>
                 </v-list-item-avatar>
-              </div>
-            
+              </div>      
           </v-flex>
         </v-layout>
 
- <div class="mt-4 text-center">
-    <a style="color: white; cursor: pointer;"  @click="toggleModal" class=" no-line">Add New Project</a>
-  </div>
- <v-divider color="#bdbdbd"></v-divider>
+          <div class="mt-4 mx-3">
+                 <a style="cursor: pointer; color: white;"  @click="toggleModal" class="no-line col"><i class="mdi mdi-plus mr-1"></i>New Project</a>
+          </div>
+
+ 
+ <v-divider class="" color="#bdbdbd"></v-divider>
  <p class="mx-3 col">Projects</p>
  <v-list dense nav class="mt-n6"> 
  <v-list-group v-for="proj in projects" :key="proj._id">
