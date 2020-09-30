@@ -88,12 +88,12 @@
 
                         </div>
                     </div>
+
                     <h5 class="mb-3">Response</h5>                    
                    
                     <h5 v-if="statusShow" :class="responseColor">{{responseCode}}</h5>
-                    <div class="row">
-                    
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">    
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="card rounded-0 p-0 shadow-sm">
                             <div class="card-body">
                                     <!-- Tabs secition for body -->
@@ -393,12 +393,6 @@ export default {
 
 <style scoped>
     /*styles */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
 
 .success_style{
   background: #17c5a6;
@@ -412,49 +406,8 @@ export default {
   color: #fff
 }
 
-@keyframes swing {
-    0% {
-      transform: rotate(0deg);
-    }
-    10% {
-      transform: rotate(10deg);
-    }
-    30% {
-      transform: rotate(0deg);
-    }
-    40% {
-      transform: rotate(-10deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    60% {
-      transform: rotate(5deg);
-    }
-    70% {
-      transform: rotate(0deg);
-    }
-    80% {
-      transform: rotate(-5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
   
-  @keyframes sonar {
-    0% {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(2);
-      opacity: 0;
-    }
-  }
-  body {
-    font-size: 0.9rem;
-  }
+ 
   .page-wrapper .sidebar-wrapper,
   .sidebar-wrapper .sidebar-brand > a,
   .sidebar-wrapper .sidebar-dropdown > a:after,

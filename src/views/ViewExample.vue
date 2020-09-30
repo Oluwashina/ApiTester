@@ -393,7 +393,7 @@ export default {
             }
         },
         Request: {
-          get(){ return this.$store.state.project.callsbyid.request},
+          get(){ return this.$store.state.project.callsbyid.request ?  this.$store.state.project.callsbyid.request : {}},
           set(v){
             this.requestBody = v
           }
