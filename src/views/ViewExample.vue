@@ -36,7 +36,7 @@
                                         </div>
                                         </div>
                                         <div class="col-lg-6">
-                                          <button :disabled="deleteOk" @click="deleteRequest($event)" class="btn btn-danger" type="submit" style="margin-top: 23px;">
+                                          <button :disabled="deleteOk" @click="deleteRequest($event)" class="btn btn-danger" type="submit" style="margin-top: 30px; color: white;">
                                                   Delete Request
                                               </button>
                                         </div>
@@ -77,7 +77,7 @@
 
                                             <!-- send section -->
                                             <div class="col-lg-2">
-                                                <button :disabled="sendOk" @click="saveRequest($event)" class="btn btn-primary" type="submit" style="margin-top: 23px;">
+                                                <button :disabled="sendOk" @click="saveRequest($event)" class="btn btn-primary" type="submit" style="margin-top: 30px; color: white;">
                                                     <i class="mdi mdi-content-save mr-2"></i>Save
                                                 </button>
                                                 
@@ -418,12 +418,6 @@ export default {
 <style scoped>
 
    /*styles */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
 
 .success_style{
   background: #17c5a6;
@@ -437,49 +431,6 @@ export default {
   color: #fff
 }
 
-@keyframes swing {
-    0% {
-      transform: rotate(0deg);
-    }
-    10% {
-      transform: rotate(10deg);
-    }
-    30% {
-      transform: rotate(0deg);
-    }
-    40% {
-      transform: rotate(-10deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    60% {
-      transform: rotate(5deg);
-    }
-    70% {
-      transform: rotate(0deg);
-    }
-    80% {
-      transform: rotate(-5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-  
-  @keyframes sonar {
-    0% {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(2);
-      opacity: 0;
-    }
-  }
-  body {
-    font-size: 0.9rem;
-  }
   .page-wrapper .sidebar-wrapper,
   .sidebar-wrapper .sidebar-brand > a,
   .sidebar-wrapper .sidebar-dropdown > a:after,

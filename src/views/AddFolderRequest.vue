@@ -73,7 +73,7 @@
 
                                             <!-- send section -->
                                             <div class="col-lg-2">
-                                                <button :disabled="sendOk" @click="saveRequest($event)" class="btn btn-primary" type="submit" style="margin-top: 25px;">
+                                                <button :disabled="sendOk" @click="saveRequest($event)" class="btn btn-primary" type="submit" style="margin-top: 30px; color: white;">
                                                     <i class="mdi mdi-content-save mr-2"></i>Save
                                                 </button>
                                                 
@@ -366,12 +366,6 @@ export default {
 <style scoped>
 
    /*styles */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
 
 .success_style{
   background: #17c5a6;

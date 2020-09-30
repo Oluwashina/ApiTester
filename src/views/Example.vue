@@ -51,7 +51,7 @@
 
                                             <!-- send section -->
                                             <div class="col-lg-2">
-                                                <button :disabled="sendOk" @click="sendRequest($event)" class="btn btn-primary" type="submit" style="margin-top: 25px;">
+                                                <button :disabled="sendOk" @click="sendRequest($event)" class="btn btn-primary" type="submit" style="margin-top:30px; color: white;">
                                                     <i class="mdi mdi-send mr-2"></i>Send
                                                 </button>
                                                 
@@ -387,6 +387,7 @@ export default {
         })
         .catch(()=>{
         });
+        this.$store.dispatch('ErrorCalls')
     },
 }
 </script>

@@ -373,13 +373,6 @@ export default {
 <style scoped>
 
    /*styles */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
-
 .success_style{
   background: #17c5a6;
   padding: 15px 20px;
