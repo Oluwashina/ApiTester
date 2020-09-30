@@ -424,9 +424,7 @@
  <v-flex class="mt-3">
  <div class="mr-2">
      <p class="col title">Api Tester</p>
- <v-img src='/peer.png' contain ></v-img>
- 
- </div>
+  </div>
  </v-flex>
  </v-layout> 
  
@@ -434,7 +432,7 @@
           <v-flex class="mt-n4">
               <div class="">
                 <v-list-item-avatar  size="50">
-                  <v-img src="/PwLogo.png" ></v-img>
+                    <v-img src="/logo.svg" ></v-img>
                 </v-list-item-avatar>
               </div>
             
@@ -536,7 +534,11 @@
             </div>
             <v-list-item class="ml-2 no-line" v-for="call in folder.calls" :key="call._id">
                 <v-list-item-icon>
-                <v-icon color="#B45C5C" small>mdi-file</v-icon>
+                    <!-- <span class="badge badge-pill badge-warning">New</span> -->
+                    <span
+                     v-bind:class="{ 'text-danger': call.method == 'DELETE', 'text-success': call.method == 'GET','text-warning': call.method == 'POST', 'text-primary': call.method == 'PUT', 'text-white': call.method == 'PATCH' }"
+                     style="font-size: 12px;">{{call.method}}</span>
+                <!-- <v-icon color="#B45C5C" small>mdi-file</v-icon> -->
                 </v-list-item-icon>
                 <v-item-content >
                 <v-list-item-title style="color:#7A7674; font-size:14px;cursor: pointer;" @click="ViewExample(call._id)" class="text-truncate">
