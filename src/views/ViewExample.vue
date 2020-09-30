@@ -29,8 +29,8 @@
                                             <input type="text" class="form-control"
                                                 id="exampleFormControlInput1"
                                                 placeholder="Enter Request Name"
-                                               :value="this.Calls.name"
-                                                @input="updateRequest"
+                                               v-model="Name"
+                                              
                                                  required>
                                                 <div class="invalid-feedback">Request name can't be blank</div>
                                         </div>
@@ -49,7 +49,7 @@
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlSelect1">Method</label>
-                                                    <select class="form-control" v-model="selected"  @change="updateMethod($event)" id="exampleFormControlSelect1" name="method">
+                                                    <select class="form-control" v-model="selected"  id="exampleFormControlSelect1" name="method">
                                                        <option v-for="(method, index) in methodSelect" 
                                                               :key="index"
                                                             :value="method"
@@ -68,8 +68,7 @@
                                                     <input type="text" class="form-control"
                                                      id="exampleFormControlInput1"
                                                       placeholder="Enter request URL"
-                                                        :value="this.Calls.url"
-                                                         @input="updateUrl" 
+                                                       v-model="Url"
                                                        required>
                                                       <div class="invalid-feedback">Missing URL</div>
                                                 </div>
@@ -131,8 +130,7 @@
                                                   id="exampleFormControlInput1"
                                                   placeholder="Enter response code"   
                                                   style="color: #17c5a6"                                             
-                                                   :value="this.Calls.status" 
-                                                    @input="updateStatus"
+                                                   v-model="Status"
                                                    required>
                                           </div>
                                     </div>
@@ -202,7 +200,7 @@ export default {
               valid1: false,
               valid2: false,
               description: '',
-              url: '',
+              url: this.$store.state.project.callsbyid.url,
               urlBlured: false,
               descriptionBlured: false,
               statusShow: false,
@@ -216,20 +214,20 @@ export default {
               method: '',
               methodSelect: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH'],
               responseMessage: '',
-              requestName: '',
+              requestName: this.$store.state.project.callsbyid.name,
               requestNameBlured: false,
               loader: false,
               loading: false,
-               json: this.$store.state.project.callsbyid.response,
-                  options: {
-            mode: "code",
-            onEditable: function(node) {
-            console.log("node", node);
-            return true;
+              json: this.$store.state.project.callsbyid.response,
+              options: {
+                mode: "code",
+                onEditable: function(node) {
+                console.log("node", node);
+                return true;
+                    }
                 }
-            }
-        }
-    },
+          }
+     },
     methods:{
       updateRequest(e){
        this.requestName = e.target.value
@@ -239,10 +237,6 @@ export default {
       },
       updateStatus(e){
         this.status = e.target.value
-      },
-      updateMethod(e){
-        console.log(e.target.value)
-        this.method = e.target.value
       },
       validateName: function(){
       this.nameBlured = true;
@@ -279,51 +273,36 @@ export default {
           : body.classList.remove("modal-open");
         setTimeout(() => (this.show = !this.show), 10);
       },
-      CreateProject(event){
-        event.preventDefault()
-        this.validateName();
-        this.validateDescription();
-         if(this.valid == true && this.valid1 ==true){
-            this.loading = true
-            this.loader = true
-            this.$store.dispatch("AddProject", {
-            "name":  this.name,
-            "description": this.description,
-          })
-        .then(()=>{
-          this.loading = false
-          this.loader = false
-          this.name = ''
-          this.description = ''
-          this.nameBlured = false
-          this.descriptionBlured = false
-           iziToast.success({
-          message: 'Project created',
-          progressBar: false,
-          })
-          this.$store.dispatch("GetProjects")
-        })
-        .catch(()=>{
-          this.loading = false
-          this.loader = false
-        })
-      }
-       
-      },
+
       saveRequest(event){
-        console.log(this.method)
-        console.log(this.url)
          var projectId = this.$route.params.id
+         console.log(projectId)
         event.preventDefault()
+        var requestValue;
+        if(!this.$store.state.project.callsbyid.request){
+          requestValue = this.Request
+        }else{
+          requestValue = this.requestBody
+        }
+        var responseValue;
+        if(!this.$store.state.project.callsbyid.response){
+          responseValue = this.Response
+        }else{
+          console.log('chage', this.responseBody)
+          responseValue = this.responseBody
+        }
+        console.log(requestValue)
+        console.log(responseValue)
+       
            this.sendOk = true
            this.$store.dispatch("updateExample",{
-             "method": this.method,
-             "url": this.url,
-             "request": this.requestBody,
-             "response": this.responseBody,
+             "method": this.selected,
+             "url": this.Url,
+             "request": requestValue,
+             "response": responseValue,
              "_id": projectId,
-             "status": this.status,
-             "name": this.requestName
+             "status": this.Status,
+             "name": this.Name
            })
            .then((success) =>{
               console.log(success)
@@ -332,6 +311,7 @@ export default {
                 message: 'Your example is now added!',
                 progressBar: false,
                 })
+              this.$store.dispatch("GetProjects")
            })
            .catch((err)=>{
              this.sendOk = false
@@ -360,7 +340,7 @@ export default {
 
                setTimeout(() => { 
               this.$router.push('/')
-             }, 5000);
+             }, 3000);
            })
            .catch((err)=>{
              this.deleteOk = false
@@ -371,38 +351,45 @@ export default {
                 })     
            })
       },
-      ViewExample(id){
-        alert(id)
-        this.$store.dispatch('GetCalls', id)
-        .then((success)=>{
-          console.log(success)
-          this.$router.push(`/project/${id}`)
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
-
-      }
     },
     computed:{
        selected: {
           get(){ return this.$store.state.project.callsbyid.method },
-          set(v){ 
-            this.method = v
-            console.log(this.method)
+          set(method){ 
+            console.log(method)
+            this.$store.commit('SET_METHOD', method)
+            }
+        },
+        Name: {
+          get(){ return this.$store.state.project.callsbyid.name },
+          set(name){ 
+            this.$store.commit('SET_NAME', name)
+            }
+        },
+        Url: {
+         get(){ return this.$store.state.project.callsbyid.url },
+          set(url){ 
+            this.$store.commit('SET_URL', url)
+            }
+        },
+        Status: {
+           get(){ return this.$store.state.project.callsbyid.status },
+          set(status){ 
+            this.$store.commit('SET_STATUS', status)
             }
         },
         Request: {
-          get(){ return this.$store.state.project.callsbyid.request ?  this.$store.state.project.callsbyid.request : {}},
-          set(v){
-            this.requestBody = v
+          get(){ return this.$store.state.project.callsbyid.request ? this.$store.state.project.callsbyid.request : {}},
+          set(request){
+            this.requestBody = request
+            this.$store.commit('SET_REQUEST', request)
           }
         },
         Response: {
-          get(){ return this.$store.state.project.callsbyid.response},
-          set(v){
-            console.log(v)
-            this.responseBody = v
+          get(){ return this.$store.state.project.callsbyid.response ? this.$store.state.project.callsbyid.response : {} },
+          set(response){
+            this.responseBody = response
+             this.$store.commit('SET_RESPONSE', response)
           }
         },
         response(){
@@ -412,6 +399,7 @@ export default {
           return this.$store.state.project.callsbyid
         }
     },
+    
 }
 </script>
 

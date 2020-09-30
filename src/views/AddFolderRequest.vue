@@ -325,6 +325,13 @@ export default {
            .then((success) =>{
               console.log(success)
               this.sendOk = false
+              this.requestName = '',
+              this.url = '',
+              this.requestBody = {},
+              this.responseBody = {}
+              this.status = ''
+               this.requestNameBlured  = false
+               this.urlBlured = false
                     iziToast.success({
                 message: 'Your example is now added!',
                 progressBar: false,

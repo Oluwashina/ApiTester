@@ -15,6 +15,9 @@ export const project = {
       Calls(state, data){
           state.calls = data
       },
+      ClearCalls(state){
+          state.callsbyid = {}
+      },
       CallsById(state, data){
           state.callsbyid = data.data
       },
@@ -24,7 +27,25 @@ export const project = {
       TestId(state, data){
           let obj = state.calls.find(o => o._id === data);
           state.callsbyid = obj
-      }
+      },
+      SET_METHOD(state, method){
+          state.callsbyid.method = method
+      },
+      SET_NAME(state, name){
+        state.callsbyid.name = name
+    },
+    SET_URL(state, url){
+        state.callsbyid.url = url
+    },
+    SET_STATUS(state, status){
+        state.callsbyid.status = status
+    },
+    SET_REQUEST(state, request){
+        state.callsbyid.request = request
+    },
+    SET_RESPONSE(state, response){
+        state.callsbyid.response = response
+    }
       
         
     },
@@ -138,6 +159,9 @@ export const project = {
                 reject(error);
             });
             })
+        },
+        ClearCalls: ({commit})=>{
+            commit("ClearCalls")
         },
         GetCalls: ({commit}, payload)=>{
             return new Promise((resolve, reject)=>{
