@@ -33,9 +33,11 @@ export const calls = {
             }
             if(payload.method == 'POST'){
                 axios.post(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
@@ -43,9 +45,11 @@ export const calls = {
             }
             if(payload.method == 'PUT'){
                 axios.put(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
@@ -53,9 +57,11 @@ export const calls = {
             }
             if(payload.method == 'DELETE'){
                 axios.delete(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
@@ -63,9 +69,11 @@ export const calls = {
             }
             if(payload.method == 'HEAD'){
                 axios.head(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
@@ -73,9 +81,11 @@ export const calls = {
             }
             if(payload.method == 'PATCH'){
                 axios.patch(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
@@ -83,9 +93,11 @@ export const calls = {
             }
             if(payload.method == 'OPTIONS'){
                 axios.options(`${payload.url}`)
-                .then(({data})=>{
-                    commit()
-                    resolve(data);
+                .then(({data, status})=>{
+                    if(status === 200){
+                        commit('response', data)
+                        resolve(data);
+                    }
                 })
                 .catch((error)=>{
                     reject(error);
